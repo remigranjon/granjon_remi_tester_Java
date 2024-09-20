@@ -15,7 +15,8 @@ public class ParkingService {
 
     private static final Logger logger = LogManager.getLogger("ParkingService");
 
-    private static final FareCalculatorService fareCalculatorService = new FareCalculatorService();
+
+    private final FareCalculatorService fareCalculatorService = new FareCalculatorService();
 
     private final InputReaderUtil inputReaderUtil;
     private final ParkingSpotDAO parkingSpotDAO;
@@ -26,6 +27,11 @@ public class ParkingService {
         this.parkingSpotDAO = parkingSpotDAO;
         this.ticketDAO = ticketDAO;
     }
+
+    public FareCalculatorService getFareCalculatorService() {
+        return fareCalculatorService;
+    }
+
 
     public void processIncomingVehicle() {
         try {
