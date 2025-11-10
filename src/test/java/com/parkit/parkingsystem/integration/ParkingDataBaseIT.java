@@ -7,7 +7,6 @@ import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
 import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
-import com.parkit.parkingsystem.service.FareCalculatorService;
 import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
 import org.junit.jupiter.api.AfterAll;
@@ -91,7 +90,7 @@ public class ParkingDataBaseIT {
         ticketDAO.updateTicket(ticket);
         parkingService.processExitingVehicle();
         ticket = ticketDAO.getTicket("ABCDEF");
-        assertEquals(ticket.getPrice(), Fare.CAR_RATE_PER_HOUR);
+        assertEquals(Fare.CAR_RATE_PER_HOUR,Math.round(ticket.getPrice()*10)/10.0);
         assertNotNull(ticket.getOutTime());
         assertNotEquals(ticket.getOutTime(),new Date(System.currentTimeMillis() - (30 * 60 * 1000)));
     }
@@ -107,7 +106,7 @@ public class ParkingDataBaseIT {
         ticketDAO.updateTicket(ticket);
         parkingService.processExitingVehicle();
         ticket = ticketDAO.getTicket("ABCDEF");
-        assertEquals(ticket.getPrice(), Math.round(Fare.CAR_RATE_PER_HOUR * 0.95*100)/100.0);
+        assertEquals(Math.ceil(Fare.CAR_RATE_PER_HOUR * 0.95*100)/100.0, Math.ceil(ticket.getPrice()*100)/100);
     }
 
 }

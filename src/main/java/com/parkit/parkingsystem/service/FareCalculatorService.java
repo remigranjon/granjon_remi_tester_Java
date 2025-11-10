@@ -34,7 +34,7 @@ public class FareCalculatorService {
             price *= 0.95;
         }
 
-        ticket.setPrice(Math.round(price * 100) / 100.0);
+        ticket.setPrice(Math.ceil(price * 100) / 100.0);
     }
 
     public void calculateFare(Ticket ticket) {

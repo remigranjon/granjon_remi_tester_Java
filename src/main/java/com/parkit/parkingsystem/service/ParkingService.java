@@ -28,24 +28,15 @@ public class ParkingService {
         this.ticketDAO = ticketDAO;
     }
 
-    public FareCalculatorService getFareCalculatorService() {
-        return fareCalculatorService;
-    }
-
-
     public void processIncomingVehicle() {
         try {
             ParkingSpot parkingSpot = getNextParkingNumberIfAvailable();
             if (parkingSpot != null && parkingSpot.getId() > 0) {
                 String vehicleRegNumber = getVehicleRegNumber();
                 parkingSpot.setAvailable(false);
-                parkingSpotDAO.updateParking(parkingSpot);// allot this parking space and mark its availability as
-                                                          // false
-
+                parkingSpotDAO.updateParking(parkingSpot);
                 Date inTime = new Date();
                 Ticket ticket = new Ticket();
-                // ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
-                // ticket.setId(ticketID);
                 ticket.setParkingSpot(parkingSpot);
                 ticket.setVehicleRegNumber(vehicleRegNumber);
                 ticket.setPrice(0);

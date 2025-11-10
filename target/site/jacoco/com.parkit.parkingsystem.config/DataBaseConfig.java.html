@@ -3,50 +3,103 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
-<span class="nc" id="L8">public class DataBaseConfig {</span>
+<span class="fc" id="L14">public class DataBaseConfig {</span>
 
-<span class="nc" id="L10">    private static final Logger logger = LogManager.getLogger(&quot;DataBaseConfig&quot;);</span>
+<span class="fc" id="L16">    private static final Logger logger = LogManager.getLogger(&quot;DataBaseConfig&quot;);</span>
+<span class="fc" id="L17">    private static final Map&lt;String, String&gt; envVars = loadEnvFile();</span>
+    
+    /**
+     * Charge les variables du fichier .env
+     */
+    protected static Map&lt;String, String&gt; loadEnvFile() {
+<span class="fc" id="L23">        Map&lt;String, String&gt; envMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L24">        Path envPath = Paths.get(&quot;.env&quot;);</span>
+        
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (Files.exists(envPath)) {</span>
+            try {
+<span class="fc" id="L28">                Files.lines(envPath)</span>
+<span class="pc bpc" id="L29" title="2 of 4 branches missed.">                    .filter(line -&gt; !line.trim().isEmpty() &amp;&amp; !line.trim().startsWith(&quot;#&quot;))</span>
+<span class="fc" id="L30">                    .forEach(line -&gt; {</span>
+<span class="fc" id="L31">                        String[] parts = line.split(&quot;=&quot;, 2);</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">                        if (parts.length == 2) {</span>
+<span class="fc" id="L33">                            envMap.put(parts[0].trim(), parts[1].trim());</span>
+                        }
+<span class="fc" id="L35">                    });</span>
+<span class="fc" id="L36">                logger.info(&quot;Fichier .env chargé avec &quot; + envMap.size() + &quot; variables&quot;);</span>
+<span class="nc" id="L37">            } catch (IOException e) {</span>
+<span class="nc" id="L38">                logger.warn(&quot;Erreur lors de la lecture du fichier .env: &quot; + e.getMessage());</span>
+<span class="pc" id="L39">            }</span>
+        } else {
+<span class="nc" id="L41">            logger.info(&quot;Aucun fichier .env trouvé, utilisation des variables système&quot;);</span>
+        }
+<span class="fc" id="L43">        return envMap;</span>
+    }
+    
+    /**
+     * Récupère une variable d'environnement (priorité : système &gt; .env &gt; défaut)
+     */
+    static String getEnvVar(String key, String defaultValue) {
+<span class="nc" id="L50">        String systemValue = System.getenv(key);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (systemValue != null) {</span>
+<span class="nc" id="L52">            return systemValue;</span>
+        }
+<span class="nc" id="L54">        return envVars.getOrDefault(key, defaultValue);</span>
+    }
 
     public Connection getConnection() throws ClassNotFoundException, SQLException {
-<span class="nc" id="L13">        logger.info(&quot;Create DB connection&quot;);</span>
-<span class="nc" id="L14">        Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span>
-<span class="nc" id="L15">        return DriverManager.getConnection(</span>
-                &quot;jdbc:mysql://localhost:3306/prod&quot;,&quot;root&quot;,&quot;rootroot&quot;);
+<span class="nc" id="L58">        logger.info(&quot;Create DB connection&quot;);</span>
+<span class="nc" id="L59">        Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span>
+        
+        // Récupérer les paramètres avec priorité : système &gt; .env &gt; défaut
+<span class="nc" id="L62">        String dbName = getEnvVar(&quot;DB_PROD_NAME&quot;, &quot;prod&quot;);</span>
+<span class="nc" id="L63">        String user = getEnvVar(&quot;DB_USER&quot;, &quot;p4_user&quot;);</span>
+<span class="nc" id="L64">        String password = getEnvVar(&quot;DB_PASSWORD&quot;, &quot;p4_password&quot;);</span>
+        
+<span class="nc" id="L66">        String url = &quot;jdbc:mysql://localhost:3306/&quot; + dbName;</span>
+<span class="nc" id="L67">        logger.info(&quot;Connecting to database: &quot; + url + &quot; with user: &quot; + user);</span>
+        
+<span class="nc" id="L69">        return DriverManager.getConnection(url, user, password);</span>
     }
 
     public void closeConnection(Connection con){
-<span class="nc bnc" id="L20" title="All 2 branches missed.">        if(con!=null){</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if(con!=null){</span>
             try {
-<span class="nc" id="L22">                con.close();</span>
-<span class="nc" id="L23">                logger.info(&quot;Closing DB connection&quot;);</span>
-<span class="nc" id="L24">            } catch (SQLException e) {</span>
-<span class="nc" id="L25">                logger.error(&quot;Error while closing connection&quot;,e);</span>
-<span class="nc" id="L26">            }</span>
+<span class="nc" id="L75">                con.close();</span>
+<span class="nc" id="L76">                logger.info(&quot;Closing DB connection&quot;);</span>
+<span class="nc" id="L77">            } catch (SQLException e) {</span>
+<span class="nc" id="L78">                logger.error(&quot;Error while closing connection&quot;,e);</span>
+<span class="nc" id="L79">            }</span>
         }
-<span class="nc" id="L28">    }</span>
+<span class="nc" id="L81">    }</span>
 
     public void closePreparedStatement(PreparedStatement ps) {
-<span class="nc bnc" id="L31" title="All 2 branches missed.">        if(ps!=null){</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if(ps!=null){</span>
             try {
-<span class="nc" id="L33">                ps.close();</span>
-<span class="nc" id="L34">                logger.info(&quot;Closing Prepared Statement&quot;);</span>
-<span class="nc" id="L35">            } catch (SQLException e) {</span>
-<span class="nc" id="L36">                logger.error(&quot;Error while closing prepared statement&quot;,e);</span>
-<span class="nc" id="L37">            }</span>
+<span class="nc" id="L86">                ps.close();</span>
+<span class="nc" id="L87">                logger.info(&quot;Closing Prepared Statement&quot;);</span>
+<span class="nc" id="L88">            } catch (SQLException e) {</span>
+<span class="nc" id="L89">                logger.error(&quot;Error while closing prepared statement&quot;,e);</span>
+<span class="nc" id="L90">            }</span>
         }
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L92">    }</span>
 
     public void closeResultSet(ResultSet rs) {
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if(rs!=null){</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if(rs!=null){</span>
             try {
-<span class="nc" id="L44">                rs.close();</span>
-<span class="nc" id="L45">                logger.info(&quot;Closing Result Set&quot;);</span>
-<span class="nc" id="L46">            } catch (SQLException e) {</span>
-<span class="nc" id="L47">                logger.error(&quot;Error while closing result set&quot;,e);</span>
-<span class="nc" id="L48">            }</span>
+<span class="nc" id="L97">                rs.close();</span>
+<span class="nc" id="L98">                logger.info(&quot;Closing Result Set&quot;);</span>
+<span class="nc" id="L99">            } catch (SQLException e) {</span>
+<span class="nc" id="L100">                logger.error(&quot;Error while closing result set&quot;,e);</span>
+<span class="nc" id="L101">            }</span>
         }
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L103">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
