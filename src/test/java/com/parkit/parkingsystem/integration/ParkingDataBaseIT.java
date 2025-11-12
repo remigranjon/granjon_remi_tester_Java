@@ -9,7 +9,6 @@ import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,24 +56,15 @@ public class ParkingDataBaseIT {
 
     }
 
-    @AfterAll
-    public static void tearDown(){
-
-    }
-
     @Test
     public void testParkingACar(){
-
-
         parkingService.processIncomingVehicle();
-
         // Verify that a ticket is saved in the database
         Ticket ticket = ticketDAO.getTicket("ABCDEF");
         assertNotNull(ticket);
         assertEquals("ABCDEF", ticket.getVehicleRegNumber());
         assertNotNull(ticket.getInTime());
         assertNull(ticket.getOutTime());
-
         // Verify that the parking spot availability is updated in the database
         ParkingSpot parkingSpot = parkingSpotDAO.getParkingSpot(ticket.getParkingSpot().getId());
         assertNotNull(parkingSpot);
@@ -99,14 +89,18 @@ public class ParkingDataBaseIT {
     public void testParkingLotExitRecurringUser(){
         parkingService.processIncomingVehicle();
         parkingService.processExitingVehicle();
-        parkingService.processIncomingVehicle();
         Ticket ticket = ticketDAO.getTicket("ABCDEF");
+        ticket.setInTime(new Date(System.currentTimeMillis() - (3*60 * 60 * 1000)));
+        ticket.setOutTime(new Date(System.currentTimeMillis() - (2*60 * 60 * 1000)));
+        ticketDAO.updateTicket(ticket);
+        // Second parking event
+        parkingService.processIncomingVehicle();
+        ticket = ticketDAO.getTicket("ABCDEF");
         ticket.setInTime(new Date(System.currentTimeMillis() - (60 * 60 * 1000)));
-        ticket.setOutTime(new Date(System.currentTimeMillis() - (30 * 60 * 1000)));
         ticketDAO.updateTicket(ticket);
         parkingService.processExitingVehicle();
         ticket = ticketDAO.getTicket("ABCDEF");
-        assertEquals(Math.ceil(Fare.CAR_RATE_PER_HOUR * 0.95*100)/100.0, Math.ceil(ticket.getPrice()*100)/100);
+        assertEquals(Math.ceil(0.95 * Fare.CAR_RATE_PER_HOUR*100)/100, Math.ceil(ticket.getPrice()*100)/100);
     }
 
 }

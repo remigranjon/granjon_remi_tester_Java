@@ -62,17 +62,6 @@ public class ParkingServiceTest {
 
 
     @Test
-    public void processExitingVehicleTest(){
-        mockGetTicket();
-        mockReadVehicleRegistrationNumber();
-        when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(true);
-        when(parkingSpotDAO.updateParking(any(ParkingSpot.class))).thenReturn(true);
-        when(ticketDAO.getNbTicket(anyString())).thenReturn(1);
-        parkingService.processExitingVehicle();
-        verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
-    }
-
-    @Test
     public void testProcessIncomingVehicle() {
         mockReadVehicleRegistrationNumber();
         when(inputReaderUtil.readSelection()).thenReturn(1);
@@ -83,7 +72,20 @@ public class ParkingServiceTest {
     }
 
     @Test
-    public void processExitingVehicleTestUnableUpdate() {
+    public void testProcessExitingVehicle(){
+        mockGetTicket();
+        mockReadVehicleRegistrationNumber();
+        when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(true);
+        when(parkingSpotDAO.updateParking(any(ParkingSpot.class))).thenReturn(true);
+        when(ticketDAO.getNbTicket(anyString())).thenReturn(1);
+        parkingService.processExitingVehicle();
+        verify(parkingSpotDAO, Mockito.times(1)).updateParking(any(ParkingSpot.class));
+    }
+
+    
+
+    @Test
+    public void testProcessExitingVehicleUnableUpdate() {
         mockGetTicket();
         mockReadVehicleRegistrationNumber();
         when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(false);
@@ -116,7 +118,7 @@ public class ParkingServiceTest {
     }
 
     @Test
-    public void testGetNextParkingNumberIfAvailableParkingNumberWrongArgument() {
+    public void testGetNextParkingNumberIfAvailableWrongArgument() {
         when(inputReaderUtil.readSelection()).thenReturn(3); // Simulate user selecting an invalid vehicle type
         ParkingSpot parkingSpot = parkingService.getNextParkingNumberIfAvailable();
         assertNull(parkingSpot);

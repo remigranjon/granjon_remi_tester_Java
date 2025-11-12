@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.parkit.parkingsystem.ParkingServiceTest" time="0.476" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.parkit.parkingsystem.ParkingServiceTest" time="0.484" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -10,11 +10,11 @@
     <property name="user.timezone" value="Europe/Paris"/>
     <property name="os.name" value="Linux"/>
     <property name="java.vm.specification.version" value="21"/>
-    <property name="org.apache.logging.log4j.assignedSequences" value="5345"/>
+    <property name="org.apache.logging.log4j.assignedSequences" value="4920"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/surefire/surefirebooter-20251110112032909_3.jar /home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/surefire 2025-11-10T11-20-32_873-jvmRun1 surefire-20251110112032909_1tmp surefire_0-20251110112032909_2tmp"/>
+    <property name="sun.java.command" value="/home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/surefire/surefirebooter-20251112131144938_3.jar /home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/surefire 2025-11-12T13-11-44_901-jvmRun1 surefire-20251112131144938_1tmp surefire_0-20251112131144938_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/test-classes:/home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/classes:/home/ubuntu/.m2/repository/org/apache/logging/log4j/log4j-api/2.12.1/log4j-api-2.12.1.jar:/home/ubuntu/.m2/repository/org/apache/logging/log4j/log4j-core/2.12.1/log4j-core-2.12.1.jar:/home/ubuntu/.m2/repository/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar:/home/ubuntu/.m2/repository/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.3.2/junit-jupiter-api-5.3.2.jar:/home/ubuntu/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/home/ubuntu/.m2/repository/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar:/home/ubuntu/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.3.2/junit-jupiter-engine-5.3.2.jar:/home/ubuntu/.m2/repository/org/junit/platform/junit-platform-engine/1.3.2/junit-platform-engine-1.3.2.jar:/home/ubuntu/.m2/repository/org/mockito/mockito-junit-jupiter/2.23.4/mockito-junit-jupiter-2.23.4.jar:/home/ubuntu/.m2/repository/org/mockito/mockito-core/2.23.4/mockito-core-2.23.4.jar:/home/ubuntu/.m2/repository/net/bytebuddy/byte-buddy/1.9.3/byte-buddy-1.9.3.jar:/home/ubuntu/.m2/repository/net/bytebuddy/byte-buddy-agent/1.9.3/byte-buddy-agent-1.9.3.jar:/home/ubuntu/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar:/home/ubuntu/.m2/repository/org/junit/platform/junit-platform-launcher/1.3.2/junit-platform-launcher-1.3.2.jar:/home/ubuntu/.m2/repository/org/junit/platform/junit-platform-commons/1.3.2/junit-platform-commons-1.3.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -29,7 +29,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/surefire/surefirebooter-20251110112032909_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/ubuntu/Documents/Travail/OC/DevJava/P4/version30102025/target/surefire/surefirebooter-20251112131144938_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.8+9-Ubuntu-0ubuntu124.04.1"/>
     <property name="user.name" value="ubuntu"/>
@@ -55,14 +55,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testGetNextParkingNumberIfAvailableParkingNumberNotFound" classname="testGetNextParkingNumberIfAvailableParkingNumberNotFound()" time="0.463">
+  <testcase name="testGetNextParkingNumberIfAvailableParkingNumberNotFound" classname="testGetNextParkingNumberIfAvailableParkingNumberNotFound()" time="0.471">
     <system-out><![CDATA[Please select vehicle type from menu
 1 CAR
 2 BIKE
-2025-11-10 11:20:33 ERROR ParkingService:82 - Error fetching next available parking slot
+2025-11-12 13:11:45 ERROR ParkingService:78 - Error fetching next available parking slot
 java.lang.Exception: Error fetching parking number from DB. Parking slots might be full
-	at com.parkit.parkingsystem.service.ParkingService.getNextParkingNumberIfAvailable(ParkingService.java:77) ~[classes/:?]
-	at com.parkit.parkingsystem.ParkingServiceTest.testGetNextParkingNumberIfAvailableParkingNumberNotFound(ParkingServiceTest.java:114) ~[test-classes/:?]
+	at com.parkit.parkingsystem.service.ParkingService.getNextParkingNumberIfAvailable(ParkingService.java:73) ~[classes/:?]
+	at com.parkit.parkingsystem.ParkingServiceTest.testGetNextParkingNumberIfAvailableParkingNumberNotFound(ParkingServiceTest.java:116) ~[test-classes/:?]
 	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
 	at java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:532) ~[junit-platform-commons-1.3.2.jar:1.3.2]
@@ -113,21 +113,33 @@ java.lang.Exception: Error fetching parking number from DB. Parking slots might 
 2 BIKE
 ]]></system-out>
   </testcase>
-  <testcase name="processExitingVehicleTestUnableUpdate" classname="processExitingVehicleTestUnableUpdate()" time="0.004">
+  <testcase name="testProcessExitingVehicleUnableUpdate" classname="testProcessExitingVehicleUnableUpdate()" time="0.004">
     <system-out><![CDATA[Please type the vehicle registration number and press enter key
 Unable to update ticket information. Error occurred
 ]]></system-out>
   </testcase>
-  <testcase name="testGetNextParkingNumberIfAvailableParkingNumberWrongArgument" classname="testGetNextParkingNumberIfAvailableParkingNumberWrongArgument()" time="0.001">
+  <testcase name="testProcessExitingVehicle" classname="testProcessExitingVehicle()" time="0.001">
+    <system-out><![CDATA[Please type the vehicle registration number and press enter key
+Please pay the parking fare:1.5
+Recorded out-time for vehicle number:ABCDEF is:Wed Nov 12 13:11:45 CET 2025
+]]></system-out>
+  </testcase>
+  <testcase name="testGetNextParkingNumberIfAvailable" classname="testGetNextParkingNumberIfAvailable()" time="0.001">
+    <system-out><![CDATA[Please select vehicle type from menu
+1 CAR
+2 BIKE
+]]></system-out>
+  </testcase>
+  <testcase name="testGetNextParkingNumberIfAvailableWrongArgument" classname="testGetNextParkingNumberIfAvailableWrongArgument()" time="0.001">
     <system-out><![CDATA[Please select vehicle type from menu
 1 CAR
 2 BIKE
 Incorrect input provided
-2025-11-10 11:20:33 ERROR ParkingService:80 - Error parsing user input for type of vehicle
+2025-11-12 13:11:45 ERROR ParkingService:76 - Error parsing user input for type of vehicle
 java.lang.IllegalArgumentException: Entered input is invalid
-	at com.parkit.parkingsystem.service.ParkingService.getVehicleType(ParkingService.java:101) ~[classes/:?]
-	at com.parkit.parkingsystem.service.ParkingService.getNextParkingNumberIfAvailable(ParkingService.java:72) ~[classes/:?]
-	at com.parkit.parkingsystem.ParkingServiceTest.testGetNextParkingNumberIfAvailableParkingNumberWrongArgument(ParkingServiceTest.java:121) ~[test-classes/:?]
+	at com.parkit.parkingsystem.service.ParkingService.getVehicleType(ParkingService.java:97) ~[classes/:?]
+	at com.parkit.parkingsystem.service.ParkingService.getNextParkingNumberIfAvailable(ParkingService.java:68) ~[classes/:?]
+	at com.parkit.parkingsystem.ParkingServiceTest.testGetNextParkingNumberIfAvailableWrongArgument(ParkingServiceTest.java:123) ~[test-classes/:?]
 	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
 	at java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:532) ~[junit-platform-commons-1.3.2.jar:1.3.2]
@@ -172,18 +184,6 @@ java.lang.IllegalArgumentException: Entered input is invalid
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) [surefire-booter-3.5.4.jar:3.5.4]
 ]]></system-out>
   </testcase>
-  <testcase name="testGetNextParkingNumberIfAvailable" classname="testGetNextParkingNumberIfAvailable()" time="0.001">
-    <system-out><![CDATA[Please select vehicle type from menu
-1 CAR
-2 BIKE
-]]></system-out>
-  </testcase>
-  <testcase name="processExitingVehicleTest" classname="processExitingVehicleTest()" time="0.001">
-    <system-out><![CDATA[Please type the vehicle registration number and press enter key
-Please pay the parking fare:1.5
-Recorded out-time for vehicle number:ABCDEF is:Mon Nov 10 11:20:33 CET 2025
-]]></system-out>
-  </testcase>
   <testcase name="testProcessIncomingVehicle" classname="testProcessIncomingVehicle()" time="0.001">
     <system-out><![CDATA[Please select vehicle type from menu
 1 CAR
@@ -191,7 +191,7 @@ Recorded out-time for vehicle number:ABCDEF is:Mon Nov 10 11:20:33 CET 2025
 Please type the vehicle registration number and press enter key
 Generated Ticket and saved in DB
 Please park your vehicle in spot number:1
-Recorded in-time for vehicle number:ABCDEF is:Mon Nov 10 11:20:33 CET 2025
+Recorded in-time for vehicle number:ABCDEF is:Wed Nov 12 13:11:45 CET 2025
 ]]></system-out>
   </testcase>
 </testsuite>

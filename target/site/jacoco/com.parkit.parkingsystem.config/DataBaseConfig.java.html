@@ -34,10 +34,10 @@ import java.util.Map;
                         }
 <span class="fc" id="L35">                    });</span>
 <span class="fc" id="L36">                logger.info(&quot;Fichier .env chargé avec &quot; + envMap.size() + &quot; variables&quot;);</span>
-<span class="nc" id="L37">            } catch (IOException e) {</span>
+<span class="pc" id="L37">            } catch (IOException e) {</span>
 <span class="nc" id="L38">                logger.warn(&quot;Erreur lors de la lecture du fichier .env: &quot; + e.getMessage());</span>
-<span class="pc" id="L39">            }</span>
-        } else {
+            }
+<span class="nc" id="L40">        } else {</span>
 <span class="nc" id="L41">            logger.info(&quot;Aucun fichier .env trouvé, utilisation des variables système&quot;);</span>
         }
 <span class="fc" id="L43">        return envMap;</span>
@@ -76,7 +76,7 @@ import java.util.Map;
 <span class="nc" id="L76">                logger.info(&quot;Closing DB connection&quot;);</span>
 <span class="nc" id="L77">            } catch (SQLException e) {</span>
 <span class="nc" id="L78">                logger.error(&quot;Error while closing connection&quot;,e);</span>
-<span class="nc" id="L79">            }</span>
+            }
         }
 <span class="nc" id="L81">    }</span>
 
@@ -87,7 +87,7 @@ import java.util.Map;
 <span class="nc" id="L87">                logger.info(&quot;Closing Prepared Statement&quot;);</span>
 <span class="nc" id="L88">            } catch (SQLException e) {</span>
 <span class="nc" id="L89">                logger.error(&quot;Error while closing prepared statement&quot;,e);</span>
-<span class="nc" id="L90">            }</span>
+            }
         }
 <span class="nc" id="L92">    }</span>
 
@@ -98,7 +98,7 @@ import java.util.Map;
 <span class="nc" id="L98">                logger.info(&quot;Closing Result Set&quot;);</span>
 <span class="nc" id="L99">            } catch (SQLException e) {</span>
 <span class="nc" id="L100">                logger.error(&quot;Error while closing result set&quot;,e);</span>
-<span class="nc" id="L101">            }</span>
+            }
         }
 <span class="nc" id="L103">    }</span>
 }
